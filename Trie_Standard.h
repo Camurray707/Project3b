@@ -5,20 +5,28 @@
 
 using namespace std;
 
+//struct Node{
+//    Node *children [26];
+//    bool isWord;
+//};
+
 class Trie_Standard {
+
 private:
-    Trie_Standard* children;
+    Trie_Standard *children[26];
     bool isWord;
 public:
-    Trie_Standard() {
-        children  = new Trie_Standard[26];
-        isWord = false;
-    };
+    Trie_Standard();
     ~Trie_Standard();
 
-    void insert(string word) {
+    void insert(string word, int &opCount);
+    int find(string word);
+    Trie_Standard* getRoot() {return this;};
+    void auto_complete(Trie_Standard* root, string word, int &opCount);
+    void query(Trie_Standard* root, string word, int &opCount);
+    int getSpace(Trie_Standard* node);
 
-    }
+
 };
 
 
