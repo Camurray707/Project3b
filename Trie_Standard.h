@@ -19,11 +19,13 @@ public:
     Trie_Standard();
     ~Trie_Standard();
 
-    void insert(string word);
-    bool find(string word);
+    void insert(string word, int &opCount);
+    int find(string word);
     Trie_Standard* getRoot() {return this;};
-    void auto_complete(Trie_Standard* root, string word);
-    void query(Trie_Standard* root, string word);
+    void auto_complete(Trie_Standard* root, string word, int &opCount);
+    void query(Trie_Standard* root, string word, int &opCount);
+    int getSpace(Trie_Standard* node);
+
 
 };
 
