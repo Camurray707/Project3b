@@ -22,8 +22,10 @@ int main(int argc, char *argv[]) {
     }
 
     Trie_Standard standardTrie;
+    Trie_BST trieBST;
     string inputWord;
     int buildTime = 0;
+    int buildTimeBST = 0;
     int searchTime = 0;
     int autoCompleteTime = 0;
     string searchWord;
@@ -32,12 +34,13 @@ int main(int argc, char *argv[]) {
     while (!input_file.eof()) {
         input_file>>inputWord;
         standardTrie.insert(stringSimplify(inputWord), buildTime);
+        trieBST.insert(trieBST.root, stringSimplify(inputWord), 0, buildTimeBST);
     }
 
 
 
     if(*argv[2] == '1') {
-        cout<<"Time taken to build the standard Trie is "<<buildTime<<" operations"
+        cout<<"Time taken to build the standard Trie is "<< buildTime <<" operations"
             <<" and space occupied by it is "<<standardTrie.getSpace(standardTrie.getRoot())<<" nodes"<<endl<<endl;
         //FIXME::add BST trie here
 
@@ -52,6 +55,14 @@ int main(int argc, char *argv[]) {
         }
     }else if (*argv[2] == '2'){
         cout<<"flag: 2"<<endl;
+
+        cout << "Time taken to build the standard Trie is " << buildTime <<
+        " and the space occupied by it is " << standardTrie.getSpace(standardTrie.getRoot()) << " nodes" << endl << endl;
+        cout << "Time taken to build the BST based Trie is " << buildTimeBST <<
+        " and the space occupied by it is " << trieBST.getSpace( trieBST.getRoot() ) << " nodes" << endl << endl;
+
+
+
     }else {
         cout<<"Wrong flag input."<<endl;
     }
