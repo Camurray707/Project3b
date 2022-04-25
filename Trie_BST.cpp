@@ -27,6 +27,7 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
                 (*root) = new Trie_BST;
                 opCount++;
                 (*root)->isEndOfWord = true;fixme::moved this logic to line 44
+                return;
             }
         }
 */
@@ -142,17 +143,10 @@ void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
 }
 
 int Trie_BST::getSpace(Trie_BST *root) {
-        int totalCount = 0;
-
         if (root == NULL) {
             return 0;
-        } else {
-            //inorder traversal of BST (Hopefully works for Trie BST too)
-            getSpace(root->left);
-            totalCount++;
-            getSpace(root->right);
         }
-        return totalCount;
+        return 1 + getSpace(root->left) + getSpace(root->eq) + getSpace(root->right);
 }
 
 

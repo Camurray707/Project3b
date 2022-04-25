@@ -44,6 +44,10 @@ int main(int argc, char *argv[]) {
     if(*argv[2] == '1') {
         cout<<"Time taken to build the standard Trie is "<< buildTime <<" operations"
             <<" and space occupied by it is "<<standardTrie.getSpace(standardTrie.getRoot())<<" nodes"<<endl<<endl;
+        cout<<"Time taken to build the standard Trie is "<< buildTimeBST <<" operations"
+            <<" and space occupied by it is "<<(*root).getSpace((root))<<" nodes"<<endl<<endl;
+
+
         //FIXME::add BST trie here
 
         cout<<"Enter search string:";
