@@ -7,7 +7,7 @@
 string stringSimplify(string word);         //helper function that removes punctuations and upper-case letters
 
 int main(int argc, char *argv[]) {
-
+    std::cout << "TOP" << std::endl;
     //Make sure there are only two arguments: a.out and txt file input
     if (argc != 3) {
         cout<<"WRONG NUMBER OF ARGUMENTS"<<endl;

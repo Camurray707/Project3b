@@ -56,10 +56,10 @@ RM = "C:\Program Files\JetBrains\CLion 2022.1\bin\cmake\win\bin\cmake.exe" -E rm
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Mis\CLionProjects\Project3b
+CMAKE_SOURCE_DIR = C:\Users\Mis\Documents\GitHub\Project3b
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Mis\CLionProjects\Project3b\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Mis\Documents\GitHub\Project3b\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Mis\CLionProjects\Project3b\cmake-build-debug\CMakeFiles C:\Users\Mis\CLionProjects\Project3b\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Mis\Documents\GitHub\Project3b\cmake-build-debug\CMakeFiles C:\Users\Mis\Documents\GitHub\Project3b\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Mis\CLionProjects\Project3b\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Mis\Documents\GitHub\Project3b\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target

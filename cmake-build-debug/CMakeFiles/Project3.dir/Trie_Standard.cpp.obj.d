@@ -1,6 +1,6 @@
 CMakeFiles/Project3.dir/Trie_Standard.cpp.obj: \
- C:\Users\Mis\CLionProjects\Project3b\Trie_Standard.cpp \
- C:\Users\Mis\CLionProjects\Project3b\Trie_Standard.h \
+ C:\Users\Mis\Documents\GitHub\Project3b\Trie_Standard.cpp \
+ C:\Users\Mis\Documents\GitHub\Project3b\Trie_Standard.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/iostream \
  C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \

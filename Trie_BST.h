@@ -17,11 +17,11 @@ public:
             right = nullptr;
             eq = nullptr;
         }
-    }*root;
+    }*root = NULL;
 
 
    // TrieNode *createTrieNode(char data);   :OLD CREATE NODE not in use anymore
-    TrieNode * insert(struct Trie_BST::TrieNode *root, std::string word, int index, int &opCount);
+    void insert(struct Trie_BST::TrieNode *root, std::string word, int index, int &opCount);
     bool find(struct TrieNode *root, std::string word);
     TrieNode * getRoot(){return root;};
     void auto_complete(Trie_BST::TrieNode * root, std::string word, int &opCount);
