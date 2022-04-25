@@ -42,7 +42,7 @@ int Trie_Standard::find(string word) {
 }
 
 void Trie_Standard::findAll(Trie_Standard* root, int& opCount) {
-    Trie_Standard * temp = root;
+    Trie_Standard* temp = root;
 
     for (int i = 0; i < 26; i++) {
         if (root->children[i] != nullptr) {
@@ -72,6 +72,7 @@ void Trie_Standard::auto_complete(Trie_Standard* root, string word, int &opCount
 
     if (root->isWord) {
         cout<<word<<" ";
+        opCount += word.size();
     }
     Trie_Standard* temp = root;
     for (int i = 0; i < 26; i++) {
