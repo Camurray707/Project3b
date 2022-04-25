@@ -15,20 +15,19 @@ Trie_BST::TrieNode *createTrieNode(char data) {
     return tempNode;
 }
 */
-Trie_BST::TrieNode Trie_BST::insert(struct Trie_BST::TrieNode *root, std::string word, int index, int &opCount){
 
-        /*
-         * Check to see if the current node is the same length of
-         * the word.  if true will set the boolen isEndOfWord to true.
-         */
+void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCount) {
+    /*
+     * Check to see if the current node is the same length of
+     * the word.  if true will set the boolen isEndOfWord to true.
+     */
 
-         if(index == word.length()){
-            if(root == nullptr){
-                root = new TrieNode();
+        if (index == word.length()) {
+            if ((*root) == nullptr) {
+                (*root) = new Trie_BST;
                 opCount++;
-                root->isEndOfWord = true;
+                (*root)->isEndOfWord = true;
             }
-            return root;
         }
 
         /*
@@ -36,29 +35,31 @@ Trie_BST::TrieNode Trie_BST::insert(struct Trie_BST::TrieNode *root, std::string
          * If it is null, create a node and then set the data
          *  of that node to the word[index] letter.
          */
-         if( root == nullptr){
-            root = new TrieNode();
-            root->data = word[index];
+         if( (*root) == nullptr){
+             (*root) = new Trie_BST;
+             (*root)->data = word[index];
              opCount++;
         }
+        /*
+         * Checks to see if the word[index] letter is the same as the root value
+         * if it is, we will check the next letter by increasing the index.
+         * If the letter is larger than the current root->data it will insert the
+         * letter in the right node.  else it will insert the letter in the left node.
+         * This allows the BST to function with letter values.
+         */
 
-         /*
-          * Checks to see if the word[index] letter is the same as the root value
-          * if it is, we will check the next letter by increasing the index.
-          * If the letter is larger than the current root->data it will insert the
-          * letter in the right node.  else it will insert the letter in the left node.
-          * This allows the BST to function with letter values.
-          */
-        if(word[index] == root->data){
-         root->eq = insert(root, word, index+1, opCount);
-        }else if(word[index] > root->data){
-            insert(root->right, word, index, opCount);
-        }else{
-            insert(root->left, word, index, opCount);
+        if (word[index] == (*root)->data) {
+           insert(&(*root)->eq, word, index + 1, opCount);
+        } else if (word[index] > (*root)->data) {
+            insert(&(*root)->right, word, index, opCount);
+        } else if (word[index] < this->data) {
+            insert(&(*root)->left, word, index, opCount);
         }
+
+    this->isEndOfWord = true;
 }
 
-bool Trie_BST::find(struct Trie_BST::TrieNode *root, std::string word) {
+bool Trie_BST::find(Trie_BST *root, std::string word) {
 
    for(int i = 0; i < word.length(); i++){
         //Check if root is null Return 0 as it doesn't match our string
@@ -81,9 +82,9 @@ bool Trie_BST::find(struct Trie_BST::TrieNode *root, std::string word) {
     return root->isEndOfWord;
 }
 
-void Trie_BST::query(Trie_BST::TrieNode * root, std::string word, int &opCount) {
+void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
 
-    Trie_BST::TrieNode* temp = root;
+     Trie_BST * temp = root;
 
     for (int i = 0; i < word.size(); i++) {
 
@@ -102,7 +103,7 @@ void Trie_BST::query(Trie_BST::TrieNode * root, std::string word, int &opCount) 
 }
 
 
-void Trie_BST::auto_complete(Trie_BST::TrieNode * root, std::string word, int &opCount) {
+void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
     if (root->isEndOfWord) {
         std::cout << word << " ";
     }
@@ -128,7 +129,7 @@ void Trie_BST::auto_complete(Trie_BST::TrieNode * root, std::string word, int &o
     }
 }
 
-int Trie_BST::getSpace(Trie_BST::TrieNode *root) {
+int Trie_BST::getSpace(Trie_BST *root) {
         int totalCount = 0;
 
         if (root == NULL) {
@@ -139,6 +140,8 @@ int Trie_BST::getSpace(Trie_BST::TrieNode *root) {
             totalCount++;
             getSpace(root->right);
         }
-
         return totalCount;
 }
+
+
+

@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     }
 
     Trie_Standard standardTrie;
-    Trie_BST trieBST;
+    Trie_BST (*root) = new Trie_BST;
     string inputWord;
     int buildTime = 0;
     int buildTimeBST = 0;
@@ -30,11 +30,13 @@ int main(int argc, char *argv[]) {
     int autoCompleteTime = 0;
     string searchWord;
 
+
+
     //read entire file and insert into tries
     while (!input_file.eof()) {
         input_file>>inputWord;
         standardTrie.insert(stringSimplify(inputWord), buildTime);
-        trieBST.insert(trieBST.root, stringSimplify(inputWord), 0, buildTimeBST);
+        root->insert( &root, stringSimplify(inputWord), 0, buildTimeBST);
     }
 
 
@@ -59,7 +61,7 @@ int main(int argc, char *argv[]) {
         cout << "Time taken to build the standard Trie is " << buildTime <<
         " and the space occupied by it is " << standardTrie.getSpace(standardTrie.getRoot()) << " nodes" << endl << endl;
         cout << "Time taken to build the BST based Trie is " << buildTimeBST <<
-        " and the space occupied by it is " << trieBST.getSpace( trieBST.getRoot() ) << " nodes" << endl << endl;
+        " and the space occupied by it is " << root->getSpace( root) << " nodes" << endl << endl;
 
 
 

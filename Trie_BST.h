@@ -2,31 +2,30 @@
 #define PROJECT3_TRIE_BST_H
 #include <iostream>
 
+
 class Trie_BST{
 
 public:
+    char data;
+    bool isEndOfWord;
+    Trie_BST *left, *eq, *right;
 
-    struct TrieNode
-    {
-        char data;
-        bool isEndOfWord;
-        TrieNode *left, *eq, *right;
-        TrieNode(){
-            isEndOfWord = false;
-            left = nullptr;
-            right = nullptr;
-            eq = nullptr;
-        }
-    }*root = NULL;
-
+    Trie_BST(){
+        this->isEndOfWord = false;
+        this->left = NULL;
+        this->eq = NULL;
+        this->right = NULL;
+    }
 
    // TrieNode *createTrieNode(char data);   :OLD CREATE NODE not in use anymore
-    void insert(struct Trie_BST::TrieNode *root, std::string word, int index, int &opCount);
-    bool find(struct TrieNode *root, std::string word);
-    TrieNode * getRoot(){return root;};
-    void auto_complete(Trie_BST::TrieNode * root, std::string word, int &opCount);
-    void query(Trie_BST::TrieNode* root, std::string word, int &opCount);
-    int getSpace(Trie_BST::TrieNode* root);
+    void insert(Trie_BST ** root, std::string word, int index, int &opCount);
+    bool find( Trie_BST *root, std::string word);
+   // Trie_BST * getRoot(){return this;};
+    void auto_complete( Trie_BST* root, std::string word, int &opCount);
+    void query( Trie_BST* root, std::string word, int &opCount);
+    int getSpace( Trie_BST* root);
 };
+
+
 
 #endif //PROJECT3_TRIE_BST_H
