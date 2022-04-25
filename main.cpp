@@ -14,6 +14,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+    //Open file from argv[1] to read
     ifstream input_file;
     input_file.open(argv[1]);
     if(!input_file.is_open()) {
@@ -21,11 +22,11 @@ int main(int argc, char *argv[]) {
         exit(2);
     }
 
-    Trie_Standard standardTrie;
+    Trie_Standard standardTrie;         //Standard trie
     string inputWord;
     int buildTime = 0;
-    int searchTime = 0;
     int autoCompleteTime = 0;
+    int fullSearchTime = 0;
     string searchWord;
 
     //read entire file and insert into tries
@@ -35,10 +36,10 @@ int main(int argc, char *argv[]) {
     }
 
 
+    cout<<"Time taken to build the standard Trie is "<<buildTime<<" operations"
+        <<" and space occupied by it is "<<standardTrie.getSpace(standardTrie.getRoot())<<" nodes"<<endl<<endl;
 
     if(*argv[2] == '1') {
-        cout<<"Time taken to build the standard Trie is "<<buildTime<<" operations"
-            <<" and space occupied by it is "<<standardTrie.getSpace(standardTrie.getRoot())<<" nodes"<<endl<<endl;
         //FIXME::add BST trie here
 
         cout<<"Enter search string:";
@@ -51,7 +52,8 @@ int main(int argc, char *argv[]) {
             cout<<"Enter search string:";
         }
     }else if (*argv[2] == '2'){
-        cout<<"flag: 2"<<endl;
+        standardTrie.findAll(standardTrie.getRoot(), fullSearchTime);
+        cout<<"Time taken to search all the strings in the standard Trie is "<<fullSearchTime<<" comparisons"<<endl;
     }else {
         cout<<"Wrong flag input."<<endl;
     }
