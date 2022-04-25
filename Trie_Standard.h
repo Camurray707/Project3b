@@ -21,6 +21,7 @@ public:
 
     void insert(string word, int &opCount);
     int find(string word);
+    void findAll(Trie_Standard* root, int& opCount);
     Trie_Standard* getRoot() {return this;};
     void auto_complete(Trie_Standard* root, string word, int &opCount);
     void query(Trie_Standard* root, string word, int &opCount);

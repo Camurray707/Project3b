@@ -26,6 +26,7 @@ int main(int argc, char *argv[]) {
     int buildTime = 0;
     int searchTime = 0;
     int autoCompleteTime = 0;
+    int fullSearhTime = 0;
     string searchWord;
 
     //read entire file and insert into tries
@@ -35,10 +36,10 @@ int main(int argc, char *argv[]) {
     }
 
 
+    cout<<"Time taken to build the standard Trie is "<<buildTime<<" operations"
+        <<" and space occupied by it is "<<standardTrie.getSpace(standardTrie.getRoot())<<" nodes"<<endl<<endl;
 
     if(*argv[2] == '1') {
-        cout<<"Time taken to build the standard Trie is "<<buildTime<<" operations"
-            <<" and space occupied by it is "<<standardTrie.getSpace(standardTrie.getRoot())<<" nodes"<<endl<<endl;
         //FIXME::add BST trie here
 
         cout<<"Enter search string:";
@@ -52,6 +53,8 @@ int main(int argc, char *argv[]) {
         }
     }else if (*argv[2] == '2'){
         cout<<"flag: 2"<<endl;
+        standardTrie.findAll(standardTrie.getRoot(), fullSearhTime);
+        cout<<"Time taken to search all the strings in the standard Trie is "<<fullSearhTime;
     }else {
         cout<<"Wrong flag input."<<endl;
     }

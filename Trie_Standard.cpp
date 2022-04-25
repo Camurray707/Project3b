@@ -40,6 +40,19 @@ int Trie_Standard::find(string word) {
     }
     return opCount;
 }
+
+void Trie_Standard::findAll(Trie_Standard* root, int& opCount) {
+    Trie_Standard * temp = root;
+
+    for (int i = 0; i < 26; i++) {
+        if (root->children[i] != nullptr) {
+            temp = root->children[i];
+            opCount++;
+            findAll(temp, opCount);
+        }
+    }
+
+}
 void Trie_Standard::query(Trie_Standard* root, string word, int &opCount) {
     Trie_Standard* temp = root;
 
