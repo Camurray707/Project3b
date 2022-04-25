@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Code/cs 415/Project3b-main/Project3b-main/Project3b/Trie_BST.cpp" "CMakeFiles/Project3.dir/Trie_BST.cpp.obj" "gcc" "CMakeFiles/Project3.dir/Trie_BST.cpp.obj.d"
-  "C:/Code/cs 415/Project3b-main/Project3b-main/Project3b/Trie_Standard.cpp" "CMakeFiles/Project3.dir/Trie_Standard.cpp.obj" "gcc" "CMakeFiles/Project3.dir/Trie_Standard.cpp.obj.d"
-  "C:/Code/cs 415/Project3b-main/Project3b-main/Project3b/main.cpp" "CMakeFiles/Project3.dir/main.cpp.obj" "gcc" "CMakeFiles/Project3.dir/main.cpp.obj.d"
+  "C:/Users/Mis/Documents/GitHub/Project3b/Trie_BST.cpp" "CMakeFiles/Project3.dir/Trie_BST.cpp.obj" "gcc" "CMakeFiles/Project3.dir/Trie_BST.cpp.obj.d"
+  "C:/Users/Mis/Documents/GitHub/Project3b/Trie_Standard.cpp" "CMakeFiles/Project3.dir/Trie_Standard.cpp.obj" "gcc" "CMakeFiles/Project3.dir/Trie_Standard.cpp.obj.d"
+  "C:/Users/Mis/Documents/GitHub/Project3b/main.cpp" "CMakeFiles/Project3.dir/main.cpp.obj" "gcc" "CMakeFiles/Project3.dir/main.cpp.obj.d"
   )
 
 # Targets to which this target links.

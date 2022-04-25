@@ -7,7 +7,7 @@
 string stringSimplify(string word);         //helper function that removes punctuations and upper-case letters
 
 int main(int argc, char *argv[]) {
-
+    std::cout << "TOP" << std::endl;
     //Make sure there are only two arguments: a.out and txt file input
     if (argc != 3) {
         cout<<"WRONG NUMBER OF ARGUMENTS"<<endl;
@@ -22,17 +22,24 @@ int main(int argc, char *argv[]) {
         exit(2);
     }
 
-    Trie_Standard standardTrie;         //Standard trie
+
+    Trie_Standard standardTrie;
+    Trie_BST (*root) = new Trie_BST;
     string inputWord;
     int buildTime = 0;
+    int buildTimeBST = 0;
+    int searchTime = 0;
     int autoCompleteTime = 0;
     int fullSearchTime = 0;
     string searchWord;
+
+
 
     //read entire file and insert into tries
     while (!input_file.eof()) {
         input_file>>inputWord;
         standardTrie.insert(stringSimplify(inputWord), buildTime);
+        root->insert( &root, stringSimplify(inputWord), 0, buildTimeBST);
     }
 
 
@@ -40,6 +47,12 @@ int main(int argc, char *argv[]) {
         <<" and space occupied by it is "<<standardTrie.getSpace(standardTrie.getRoot())<<" nodes"<<endl<<endl;
 
     if(*argv[2] == '1') {
+
+        cout<<"Time taken to build the standard Trie is "<< buildTime <<" operations"
+            <<" and space occupied by it is "<<standardTrie.getSpace(standardTrie.getRoot())<<" nodes"<<endl<<endl;
+        cout<<"Time taken to build the standard Trie is "<< buildTimeBST <<" operations"
+            <<" and space occupied by it is "<<(*root).getSpace((root))<<" nodes"<<endl<<endl;
+
         //FIXME::add BST trie here
 
         cout<<"Enter search string:";
@@ -52,8 +65,15 @@ int main(int argc, char *argv[]) {
             cout<<"Enter search string:";
         }
     }else if (*argv[2] == '2'){
-        standardTrie.findAll(standardTrie.getRoot(), fullSearchTime);
-        cout<<"Time taken to search all the strings in the standard Trie is "<<fullSearchTime<<" comparisons"<<endl;
+
+        cout<<"flag: 2"<<endl;
+
+        cout << "Time taken to build the standard Trie is " << buildTime <<
+        " and the space occupied by it is " << standardTrie.getSpace(standardTrie.getRoot()) << " nodes" << endl << endl;
+        cout << "Time taken to build the BST based Trie is " << buildTimeBST <<
+        " and the space occupied by it is " << root->getSpace( root) << " nodes" << endl << endl;
+
+
     }else {
         cout<<"Wrong flag input."<<endl;
     }
