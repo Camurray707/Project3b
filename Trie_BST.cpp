@@ -21,15 +21,15 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
      * Check to see if the current node is the same length of
      * the word.  if true will set the boolen isEndOfWord to true.
      */
-
+    /*
         if (index == word.length()) {
             if ((*root) == nullptr) {
                 (*root) = new Trie_BST;
                 opCount++;
-                (*root)->isEndOfWord = true;
+                (*root)->isEndOfWord = true;fixme::moved this logic to line 44
             }
         }
-
+*/
         /*
          * Check to see if the current root node is NULL
          * If it is null, create a node and then set the data
@@ -39,6 +39,11 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
              (*root) = new Trie_BST;
              (*root)->data = word[index];
              opCount++;
+             if(index == word.length()) {
+                 opCount++;
+                 (*root)->isEndOfWord = true;
+                 return;        //fixme::once ending node is created and boolean is set to true, end inserting.
+             }
         }
         /*
          * Checks to see if the word[index] letter is the same as the root value
@@ -49,19 +54,24 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
          */
 
         if (word[index] == (*root)->data) {
-           insert(&(*root)->eq, word, index + 1, opCount);
+            insert(&(*root)->eq, word, index + 1, opCount);
         } else if (word[index] > (*root)->data) {
             insert(&(*root)->right, word, index, opCount);
-        } else if (word[index] < this->data) {
+        } else if (word[index] < (*root)->data) {
             insert(&(*root)->left, word, index, opCount);
         }
 
-    this->isEndOfWord = true;
+    //this->isEndOfWord = true;
 }
 
+//fixme::find function works
 bool Trie_BST::find(Trie_BST *root, std::string word) {
 
-   for(int i = 0; i < word.length(); i++){
+    if (word[0] < root->data) {root = root->left;}
+    else if (word[0] > root->data) {root = root->right;}
+    else {root = root->eq;}
+
+    for(int i = 0; i < word.length(); i++){
         //Check if root is null Return 0 as it doesn't match our string
         if(root == nullptr) {
             return false;
@@ -71,8 +81,10 @@ bool Trie_BST::find(Trie_BST *root, std::string word) {
         if(root->data == word[i]){
             root = root->eq;
         }else if(root->data < word[i]){
+            i--;
             root = root->right;
         }else if(root->data > word[i]){
+            i--;
             root = root->left;
         }else{
             return false;

@@ -11,6 +11,7 @@ public:
     Trie_BST *left, *eq, *right;
 
     Trie_BST(){
+
         this->isEndOfWord = false;
         this->left = NULL;
         this->eq = NULL;
