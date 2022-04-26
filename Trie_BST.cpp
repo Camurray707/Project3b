@@ -100,12 +100,11 @@ void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
 
      Trie_BST * temp = root;
         int i = 0;
-        std::string newWord;
+
         while (temp && i < word.length()){
 
             if (temp->data == word[i]) {
-                    temp = temp->eq;
-                newWord = newWord + word[i];
+                temp = temp->eq;
                 i++;
             } else if (temp->data < word[i]) {
                 temp = temp->right;
@@ -118,7 +117,7 @@ void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
 
 
     }
-    auto_complete(temp, newWord, opCount);
+    auto_complete(temp, word, opCount);
 }
 
 
