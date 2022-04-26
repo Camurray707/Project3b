@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
 
             cout<<"Time taken to search in the standard Trie is "<<standardTrie.find(stringSimplify(searchWord))<<" comparisons"<<endl;
             cout<<"Auto-complete results using standard Trie are: ";
-            standardTrie.query(standardTrie.getRoot(), searchWord, autoCompleteTime);
+            standardTrie.query(standardTrie.getRoot(), stringSimplify(searchWord), autoCompleteTime);
             cout<<endl<<"Time taken to find auto-complete results in the standard Trie is "<<autoCompleteTime<<" comparisons"<<endl<<endl;
 
             cout<< "Time taken to search in the BST based Trie is " << root->find(root, stringSimplify((searchWord))) << " comparisons" << endl;
