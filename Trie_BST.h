@@ -20,7 +20,7 @@ public:
 
    // TrieNode *createTrieNode(char data);   :OLD CREATE NODE not in use anymore
     void insert(Trie_BST ** root, std::string word, int index, int &opCount);
-    bool find( Trie_BST *root, std::string word);
+    bool find( Trie_BST *root, std::string word, int &opCount);
    // Trie_BST * getRoot(){return this;};
     void auto_complete( Trie_BST* root, std::string word, int &opCount);
     void query( Trie_BST* root, std::string word, int &opCount);

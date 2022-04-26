@@ -37,11 +37,12 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
          *  of that node to the word[index] letter.
          */
          if( (*root) == nullptr){
-             (*root) = new Trie_BST;
-             (*root)->data = word[index];
-             opCount++;
-             if(index == word.length()) {
+
+                 (*root) = new Trie_BST;
+                 (*root)->data = word[index];
                  opCount++;
+            if(index == word.length() - 1){
+                opCount++;
                  (*root)->isEndOfWord = true;
                  return;        //fixme::once ending node is created and boolean is set to true, end inserting.
              }
@@ -66,80 +67,87 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
 }
 
 //fixme::find function works
-bool Trie_BST::find(Trie_BST *root, std::string word) {
+bool Trie_BST::find(Trie_BST *root, std::string word, int &opCount) {
+    Trie_BST * temp = root;
 
-    if (word[0] < root->data) {root = root->left;}
-    else if (word[0] > root->data) {root = root->right;}
-    else {root = root->eq;}
-
-    for(int i = 0; i < word.length(); i++){
+    int i = 0;
+    while (root && i < word.length()){
         //Check if root is null Return 0 as it doesn't match our string
-        if(root == nullptr) {
+        if(temp == nullptr) {
             return false;
         }
         //Check if data(letter) is > < or = to word[i] advance root to next node if any of these match
         //If these are all false, return 0 as there is no match.
-        if(root->data == word[i]){
-            root = root->eq;
-        }else if(root->data < word[i]){
-            i--;
-            root = root->right;
-        }else if(root->data > word[i]){
-            i--;
-            root = root->left;
+
+        if(temp->data == word[i]){
+            opCount++;
+            temp = temp->eq;
+            i++;
+        }else if(temp->data < word[i]){
+            temp = temp->right;
+        }else if(temp->data > word[i]){
+            temp = temp->left;
         }else{
             return false;
         }
         }
    //returns isEndOfWord once there is a full match for length of word string.
-    return root->isEndOfWord;
+    return temp->isEndOfWord;
+
 }
 
 void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
 
      Trie_BST * temp = root;
+        int i = 0;
+        std::string newWord;
+        while (temp && i < word.length()){
 
-    for (int i = 0; i < word.size(); i++) {
-
-        if (temp->data == word[i]) {
-            temp = temp->eq;
-        }else if(temp->data < word[i]){
-            temp = temp->right;
-        } else if (temp->data > word[i]) {
-            temp = temp->left;
-        }else{
-                std::cout<<"No query for \'"<<word<<"\' found."<< std::endl;
+            if (temp->data == word[i]) {
+                    temp = temp->eq;
+                newWord = newWord + word[i];
+                i++;
+            } else if (temp->data < word[i]) {
+                temp = temp->right;
+            } else if (temp->data > word[i]) {
+                temp = temp->left;
+            } else {
+                std::cout << "No query for \'" << word << "\' found." << std::endl;
                 return;
             }
+
+
     }
-    auto_complete(temp, word, opCount);
+    auto_complete(temp, newWord, opCount);
 }
 
 
 void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
     if (root->isEndOfWord) {
-        std::cout << word << ", ";
+        word = word + root->data;
+        std::cout << word << " ";
+        opCount += word.size();
     }
 
-    if (root != nullptr) {
+
+
         std::string newWord;
         if (root->left != nullptr) {
-            opCount++;
             newWord = word + root->data;
-            auto_complete(root->left, word, opCount);
+            auto_complete(root->left, newWord, opCount);
         }
         if (root->eq != nullptr) {
-            opCount++;
             newWord = word + root->data;
-            auto_complete(root->eq, word, opCount);
+            auto_complete(root->eq, newWord, opCount);
         }
         if (root->right != nullptr) {
-            opCount++;
             newWord = word + root->data;
-            auto_complete(root->right, word, opCount);
+            auto_complete(root->right, newWord, opCount);
         }
 
-    }
+
+
+
 }
 
 int Trie_BST::getSpace(Trie_BST *root) {
