@@ -118,7 +118,7 @@ void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
 
 void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
     if (root->isEndOfWord) {
-        std::cout << word << " ";
+        std::cout << word << ", ";
     }
 
     if (root != nullptr) {
