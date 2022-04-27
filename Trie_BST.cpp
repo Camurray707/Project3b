@@ -68,31 +68,28 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
 
 //fixme::find function works
 bool Trie_BST::find(Trie_BST *root, std::string word, int &opCount) {
-    Trie_BST * temp = root;
+    Trie_BST *temp = root;
     int i = 0;
-    while (root && i < word.length()){
+    while (!root->isEndOfWord && i < word.length() -1) {
         //Check if root is null Return 0 as it doesn't match our string
-        if(temp == nullptr) {
+        if (temp == nullptr) {
             return false;
         }
         //Check if data(letter) is > < or = to word[i] advance root to next node if any of these match
         //If these are all false, return 0 as there is no match.
-        if(temp->data == word[i]){
-            opCount++;
-            if(!temp->isEndOfWord) {
-                temp = temp->eq;
-            }
+        if (temp->data == word[i]) {
+            temp = temp->eq;
             i++;
-        }else if(temp->data < word[i]){
+        } else if (temp->data < word[i]) {
             temp = temp->right;
-        }else if(temp->data > word[i]){
+        } else if (temp->data > word[i]) {
             temp = temp->left;
-        }else{
+        } else {
             return false;
         }
-        }
-   //returns isEndOfWord once there is a full match for length of word string.
-    return temp->isEndOfWord;
+    }
+    opCount = opCount + word.length();  //add last computation as the final letter also has the isEndOfWordFlag
+    return temp->isEndOfWord;//returns isEndOfWord once there is a full match for length of word string.
 }
 
 void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
