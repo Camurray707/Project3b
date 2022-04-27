@@ -97,12 +97,18 @@ void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
     Trie_BST *temp = root;
     int i = 0;
     std::string newWord;
-    while (!temp->isEndOfWord && i < word.length()) {
+    while (!temp->isEndOfWord &&  i < word.length()) {
         if (temp->data == word[i]) {
             newWord = newWord + word[i];
             temp = temp->eq;
             opCount++;
             i++;
+            if(temp->isEndOfWord && i != word.length() -1){
+                newWord = newWord + word[i];
+                temp = temp->eq;
+                opCount++;
+                i++;
+            }
         } else if (temp->data < word[i]) {
             temp = temp->right;
         } else if (temp->data > word[i]) {
