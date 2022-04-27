@@ -97,16 +97,14 @@ void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
     Trie_BST *temp = root;
     int i = 0;
     std::string newWord;
-    while (!temp->isEndOfWord &&  i < word.length()) {
+    while (!temp->isEndOfWord &&  i < word.length()) { //fixme: This is the trouble spot The conditions aren't correct, thus exiting early when searching teasing
         if (temp->data == word[i]) {
             newWord = newWord + word[i];
             temp = temp->eq;
-            opCount++;
             i++;
             if(temp->isEndOfWord && i != word.length() -1){
                 newWord = newWord + word[i];
                 temp = temp->eq;
-                opCount++;
                 i++;
             }
         } else if (temp->data < word[i]) {
@@ -118,6 +116,7 @@ void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
             return;
         }
     }
+    opCount = opCount + word.size();
     auto_complete(temp, newWord, opCount);
 }
 
