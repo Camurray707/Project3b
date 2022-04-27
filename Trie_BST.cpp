@@ -42,7 +42,7 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
                  (*root)->data = word[index];
                  opCount++;
             if(index == word.length() - 1){
-                opCount++;
+               // opCount++;
                  (*root)->isEndOfWord = true;
                  return;        //fixme::once ending node is created and boolean is set to true, end inserting.
              }
@@ -94,25 +94,23 @@ bool Trie_BST::find(Trie_BST *root, std::string word, int &opCount) {
 
 void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
 
-     Trie_BST * temp = root;
-        int i = 0;
-        std::string newWord;
-        while (!temp->isEndOfWord && i < word.length()){
-                if (temp->data == word[i]) {
-                    newWord = newWord + word[i];
-                    temp = temp->eq;
-                    opCount++;
-                    i++;
-                } else if (temp->data < word[i]) {
-                    temp = temp->right;
-                } else if (temp->data > word[i]) {
-                    temp = temp->left;
-                } else {
-                    std::cout << "No query for \'" << word << "\' found." << std::endl;
-                    return;
-                }
-
-
+    Trie_BST *temp = root;
+    int i = 0;
+    std::string newWord;
+    while (!temp->isEndOfWord && i < word.length()) {
+        if (temp->data == word[i]) {
+            newWord = newWord + word[i];
+            temp = temp->eq;
+            opCount++;
+            i++;
+        } else if (temp->data < word[i]) {
+            temp = temp->right;
+        } else if (temp->data > word[i]) {
+            temp = temp->left;
+        } else {
+            std::cout << "No query for \'" << word << "\' found." << std::endl;
+            return;
+        }
     }
     auto_complete(temp, newWord, opCount);
 }
