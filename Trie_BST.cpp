@@ -30,6 +30,7 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
                  opCount++;
             if(index == word.length() - 1){
                // opCount++;
+
                  (*root)->isEndOfWord = true;
                  return;        //fixme::once ending node is created and boolean is set to true, end inserting.
              }
@@ -44,6 +45,12 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
 
         if (word[index] == (*root)->data) {
             if (index == word.length() - 1) {
+                if(!(*root)->isEndOfWord){
+                    (*root)->isEndOfWord = true;
+                }
+                if(word == "lord"){
+                std::cout <<"<------LORD IS HERE____------>";
+                }
                 return;
             }
             insert(&(*root)->eq, word, index + 1, opCount);
@@ -114,6 +121,7 @@ void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
 void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
     std::string newWord;
     if (root->isEndOfWord) {
+
         opCount++;
         std::cout<<word<<" ";
         if(root->eq != nullptr) {
@@ -128,6 +136,7 @@ void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
             std::string leftWord = word;
             leftWord.pop_back();
             leftWord = leftWord + leftRoot->data;
+
             auto_complete(leftRoot, leftWord, opCount);
         }
         if (root->right != nullptr){
@@ -135,11 +144,15 @@ void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
             std::string rightWord = word;
             rightWord.pop_back();
             rightWord = rightWord + rightRoot->data;
+
             auto_complete(rightRoot, rightWord, opCount);
         }
         if (root->eq != nullptr) {
             Trie_BST* middleRoot = root->eq;
             std::string middleWord =  word + middleRoot->data;
+            if(middleWord == "lord"){
+
+            }
             auto_complete(middleRoot, middleWord, opCount);
         }
 
