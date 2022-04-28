@@ -30,7 +30,6 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
                  opCount++;
             if(index == word.length() - 1){
                // opCount++;
-
                  (*root)->isEndOfWord = true;
                  return;        //fixme::once ending node is created and boolean is set to true, end inserting.
              }
@@ -47,9 +46,6 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
             if (index == word.length() - 1) {
                 if(!(*root)->isEndOfWord){
                     (*root)->isEndOfWord = true;
-                }
-                if(word == "lord"){
-                std::cout <<"<------LORD IS HERE____------>";
                 }
                 return;
             }
