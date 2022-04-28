@@ -56,6 +56,9 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
          */
 
         if (word[index] == (*root)->data) {
+            if (index == word.length() - 1) {
+                return;
+            }
             insert(&(*root)->eq, word, index + 1, opCount);
         } else if (word[index] > (*root)->data) {
             insert(&(*root)->right, word, index, opCount);
@@ -97,19 +100,29 @@ void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
     Trie_BST *temp = root;
     int i = 0;
     std::string newWord;
-    while (!temp->isEndOfWord &&  i < word.length()) { //fixme: This is the trouble spot The conditions aren't correct, thus exiting early when searching teasing
+    while ((!temp->isEndOfWord ||  i < word.length()) && newWord != word) {
         if (temp->data == word[i]) {
             newWord = newWord + word[i];
-            temp = temp->eq;
-            i++;
-            if(temp->isEndOfWord && i != word.length() -1){
-                newWord = newWord + word[i];
+            if (temp->eq != nullptr && newWord != word) {
                 temp = temp->eq;
-                i++;
+            }
+            i++;
+            if(temp == nullptr && i != word.length() -1){
+//                newWord = newWord + word[i];
+//                temp = temp->eq;
+//                i++;
             }
         } else if (temp->data < word[i]) {
+            if ( temp->right == nullptr) {
+                std::cout << "No query for \'" << word << "\' found." << std::endl;
+                return;
+            }
             temp = temp->right;
         } else if (temp->data > word[i]) {
+            if (temp->left == nullptr) {
+                std::cout << "No query for \'" << word << "\' found." << std::endl;
+                return;
+            }
             temp = temp->left;
         } else {
             std::cout << "No query for \'" << word << "\' found." << std::endl;
@@ -122,29 +135,38 @@ void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
 
 
 void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
+    std::string leftWord;
+    std::string middleWord;
+    std::string rightWord;
+
     if (root->isEndOfWord) {
-        word = word + root->data;
+        //word = word + root->data;
         opCount++;
         std::cout << word << " ";
-        if(root != nullptr) {
-            root = root->eq;
-        }
-    }
-
-        std::string newWord;
-    if(root != nullptr) {
-        if (root->left != nullptr) {
-            // newWord = word + root->data;
-            auto_complete(root->left, newWord, opCount);
-        }
         if (root->eq != nullptr) {
-            opCount++;
-            newWord = word + root->data;
-            auto_complete(root->eq, newWord, opCount);
-        }
-        if (root->right != nullptr) {
-            // newWord = word + root->data;
-            auto_complete(root->right, newWord, opCount);
+            root = root->eq;
+            middleWord = word + root->data;
+            auto_complete(root, middleWord, opCount);
+        } else { return; }
+    } else {
+        if (root != nullptr) {
+            leftWord = middleWord = rightWord =  word + root->eq->data;
+            root = root->eq;
+            if (root->left != nullptr) {
+                leftWord.pop_back();
+                leftWord = leftWord + root->left->data;
+                auto_complete(root->left, leftWord, opCount);
+            }
+            if (root->eq != nullptr) {
+                opCount++;
+                middleWord = middleWord + root->eq->data;
+                auto_complete(root, middleWord, opCount);
+            }
+            if (root->right != nullptr) {
+                rightWord.pop_back();
+                rightWord = rightWord + root->right->data;
+                auto_complete(root->right, rightWord, opCount);
+            }
         }
     }
 }
