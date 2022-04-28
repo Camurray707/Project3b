@@ -17,20 +17,7 @@ Trie_BST::TrieNode *createTrieNode(char data) {
 */
 
 void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCount) {
-    /*
-     * Check to see if the current node is the same length of
-     * the word.  if true will set the boolen isEndOfWord to true.
-     */
-    /*
-        if (index == word.length()) {
-            if ((*root) == nullptr) {
-                (*root) = new Trie_BST;
-                opCount++;
-                (*root)->isEndOfWord = true;fixme::moved this logic to line 44
-                return;
-            }
-        }
-*/
+
         /*
          * Check to see if the current root node is NULL
          * If it is null, create a node and then set the data
@@ -65,11 +52,8 @@ void Trie_BST::insert(Trie_BST ** root, std::string word, int index, int &opCoun
         } else if (word[index] < (*root)->data) {
             insert(&(*root)->left, word, index, opCount);
         }
-
-    //this->isEndOfWord = true;
 }
 
-//fixme::find function works
 bool Trie_BST::find(Trie_BST *root, std::string word, int &opCount) {
     Trie_BST *temp = root;
     int i = 0;
@@ -107,11 +91,6 @@ void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
                 temp = temp->eq;
             }
             i++;
-            if(temp == nullptr && i != word.length() -1){
-//                newWord = newWord + word[i];
-//                temp = temp->eq;
-//                i++;
-            }
         } else if (temp->data < word[i]) {
             if ( temp->right == nullptr) {
                 std::cout << "No query for \'" << word << "\' found." << std::endl;
@@ -132,8 +111,42 @@ void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
     opCount = opCount + word.size();
     auto_complete(temp, newWord, opCount);
 }
+void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
+    std::string newWord;
+    if (root->isEndOfWord) {
+        opCount++;
+        std::cout<<word<<" ";
+        if(root->eq != nullptr) {
+            root = root->eq;
+            newWord = word + root->data;
+            auto_complete(root, newWord, opCount);
+            return;
+        }else{return;}
+    }else {
+        if (root->left != nullptr) {
+            Trie_BST* leftRoot = root->left;
+            std::string leftWord = word;
+            leftWord.pop_back();
+            leftWord = leftWord + leftRoot->data;
+            auto_complete(leftRoot, leftWord, opCount);
+        }
+        if (root->right != nullptr){
+            Trie_BST* rightRoot = root->right;
+            std::string rightWord = word;
+            rightWord.pop_back();
+            rightWord = rightWord + rightRoot->data;
+            auto_complete(rightRoot, rightWord, opCount);
+        }
+        if (root->eq != nullptr) {
+            Trie_BST* middleRoot = root->eq;
+            std::string middleWord =  word + middleRoot->data;
+            auto_complete(middleRoot, middleWord, opCount);
+        }
 
+    }
+}
 
+/*****
 void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
     std::string leftWord;
     std::string middleWord;
@@ -170,7 +183,7 @@ void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
         }
     }
 }
-
+*****/
 int Trie_BST::getSpace(Trie_BST *root) {
         if (root == NULL) {
             return 0;
