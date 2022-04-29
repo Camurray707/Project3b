@@ -117,7 +117,6 @@ void Trie_BST::query(Trie_BST *root, std::string word, int &opCount) {
 void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
     std::string newWord;
     if (root->isEndOfWord) {
-
         opCount++;
         std::cout<<word<<" ";
         if(root->eq != nullptr) {
@@ -146,9 +145,7 @@ void Trie_BST::auto_complete(Trie_BST * root, std::string word, int &opCount) {
         if (root->eq != nullptr) {
             Trie_BST* middleRoot = root->eq;
             std::string middleWord =  word + middleRoot->data;
-            if(middleWord == "lord"){
 
-            }
             auto_complete(middleRoot, middleWord, opCount);
         }
 
