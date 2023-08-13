@@ -5,7 +5,7 @@ Christopher Murray and Kevin Cozart
 
 To Run: 
 
-Open project in prefered c++ IDE. (I used Clion 2022.1 build CL-221.5080.224)
+Open project in prefered c++ IDE. (I (Kevin) used Clion 2022.1 build CL-221.5080.224)
 setup program arguments as follows. 
 	test.txt 1 //runs flag 1
 	test.txt 2 //runs flag 2
